@@ -9,3 +9,8 @@ export function getClientId(): string | null {
     if (typeof window === 'undefined') return null;
     return localStorage.getItem('clientId');
 }
+
+export function setClientId(clientId: string): void {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem('clientId', clientId);
+}
