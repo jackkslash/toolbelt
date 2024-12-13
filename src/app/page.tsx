@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { ClientIdInitializer } from "./components/ClientIdInitializer";
-import { Id } from "./components/Id";
+import { SyncModal } from "./components/SyncModal";
+
 export default function Home() {
   return (
     <>
-      <ClientIdInitializer />
-      <div className="flex flex-col items-center justify-center bg-black h-screen">
+      <div className="flex flex-col items-center justify-center bg-gray-900 h-screen">
         <div className="flex flex-row items-center justify-center gap-4 text-white">
           <h1 className="text-6xl font-bold text-white">toolbelt</h1>
           <div className="flex flex-col gap-2 p-8 text-white font-bold">
@@ -17,7 +16,7 @@ export default function Home() {
               pomodoro </Link>
           </div>
         </div>
-        <Id />
+        <SyncModal />
       </div>
 
     </>
