@@ -1,8 +1,8 @@
 'use client';
 
 import QRCode from "react-qr-code";
-import { useCopyToClipboard } from "../utils/utils";
 import { Check, Copy } from "lucide-react";
+import { useCopyToClipboard } from "../hooks/useCopyClipboard";
 
 export function Id() {
     const id = localStorage.getItem('ID');

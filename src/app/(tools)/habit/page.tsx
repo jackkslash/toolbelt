@@ -1,3 +1,5 @@
+import Cube from '@/app/components/Cube'
+import Habit from '@/app/components/Habit'
 import Link from 'next/link'
 import React from 'react'
 
@@ -16,6 +18,7 @@ export default function page() {
                             pomodoro </Link>
                     </div>
                 </div>
+                <Habit></Habit>
             </div>
 
         </>
