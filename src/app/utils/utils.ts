@@ -18,6 +18,36 @@ export function setClientId(clientId: string): void {
     localStorage.setItem('clientId', clientId);
 }
 
+interface dateGroups {
+    month: string;  // Format: "YYYY-MM"
+    monthText: string;
+    dates: string[];  // Full ISO 8601 dates for that month
+}
+
+
+export function getLastNDays(days: number = 365): dateGroups[] {
+    const today = new Date();
+    const monthGroups: { [key: string]: string[] } = {}
+
+    for (let i = days; i > 0; i--) {
+        const date = new Date(today)
+        date.setDate(today.getDate() - i)
+        date.setHours(0, 0, 0, 0)
+
+        const monthKey = date.toISOString().slice(0, 7)
+        if (!monthGroups[monthKey]) {
+            monthGroups[monthKey] = []
+        }
+        monthGroups[monthKey].push(date.toISOString())
+    }
+
+    return Object.entries(monthGroups).map(([key, dates]) => ({
+        month: key,
+        monthText: new Date(key).toLocaleDateString('en-US', { month: 'short' }),
+        dates
+    }))
+}
+
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))

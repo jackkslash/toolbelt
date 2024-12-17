@@ -6,7 +6,7 @@ import React from 'react'
 export default function page() {
     return (
         <>
-            <div className="flex flex-col items-center justify-center bg-gray-900 h-screen">
+            <div className="flex flex-col items-center justify-center bg-gray-900 h-screen ">
                 <div className="flex flex-row items-center justify-center gap-4 text-white">
                     <Link href="/">
                         <h1 className="text-6xl font-bold text-white">toolbelt</h1>
