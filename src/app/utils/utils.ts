@@ -15,7 +15,8 @@ export function getClientId(): string | null {
 
 export function setClientId(clientId: string): void {
     if (typeof window === 'undefined') return;
-    localStorage.setItem('clientId', clientId);
+    if (!clientId) return;
+    localStorage.setItem('ID', clientId);
 }
 
 interface dateGroups {

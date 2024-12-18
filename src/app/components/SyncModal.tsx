@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ClientIdInitializer } from './ClientIdInitializer';
 import { Id } from './Id';
+import { setClientId } from '../utils/utils';
 
 export function SyncModal() {
     const [isOpen, setIsOpen] = useState(false);
@@ -32,10 +33,20 @@ export function SyncModal() {
                         <ClientIdInitializer />
                         <Id />
                         <br />
-                        <div className='flex  gap-2'>
-                            <input type="text" className='px-4 py-2 text-white font-bold rounded hover:text-gray-400 transition-colors' placeholder="Enter your ID" />
-                            <button className='px-4 py-2 text-white font-bold lowercase rounded hover:text-gray-400 transition-colors'>Generate</button>
-                        </div>
+                        <form className='flex gap-2' onSubmit={(e) => {
+                            const inputElement = e.currentTarget.elements.namedItem('id') as HTMLInputElement;
+
+                            if (!inputElement?.value) {
+                                e.preventDefault()
+                                return
+                            } else {
+                                setClientId(inputElement?.value)
+                                closeModal()
+                            }
+                        }}>
+                            <input type="text" className='px-4 py-2 text-black font-bold rounded transition-colors' placeholder="Enter your ID" name='id' />
+                            <button type='submit' className='px-4 py-2 text-white font-bold lowercase rounded hover:text-gray-400 transition-colors'>Generate</button>
+                        </form>
                     </div>
                 </div>
             )}
