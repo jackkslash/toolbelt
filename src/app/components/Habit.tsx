@@ -1,7 +1,7 @@
 import React from 'react'
 import Cube from './Cube'
 import { getLastNDays } from '../utils/utils';
-import { X } from 'lucide-react';
+import { DeleteModal } from './DeleteModal';
 
 export default function Habit() {
     const year = getLastNDays(365);
@@ -11,7 +11,7 @@ export default function Habit() {
             <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-md bg-slate-700 p-4 border border-slate-700 rounded-lg'>
                 <div className='flex justify-between items-center'>
                     <h1 className=' text-white font-bold uppercase'>habit</h1>
-                    <X className='text-white cursor-pointer' />
+                    <DeleteModal />
                 </div>
 
                 <div className='flex flex-row gap-2 overflow-x-auto max-w-screen-md'>

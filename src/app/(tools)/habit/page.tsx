@@ -1,3 +1,4 @@
+import { CreateModal } from '@/app/components/CreateModal'
 import Cube from '@/app/components/Cube'
 import Habit from '@/app/components/Habit'
 import Link from 'next/link'
@@ -19,6 +20,7 @@ export default function page() {
                     </div>
                 </div>
                 <Habit></Habit>
+                <CreateModal />
             </div>
 
         </>
