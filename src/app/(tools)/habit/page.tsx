@@ -1,10 +1,13 @@
+'use client';
 import { CreateModal } from '@/app/components/CreateModal'
-import Cube from '@/app/components/Cube'
-import Habit from '@/app/components/Habit'
+import Habit from '@/app/components/Habit';
+import { useHabit } from '@/app/stores/use-habit';
 import Link from 'next/link'
 import React from 'react'
 
 export default function page() {
+    const { habits } = useHabit();
+
     return (
         <>
             <div className="flex flex-col items-center justify-center bg-gray-900 h-screen ">
@@ -19,7 +22,9 @@ export default function page() {
                             pomodoro </Link>
                     </div>
                 </div>
-                <Habit></Habit>
+                {habits.map((habit) => (
+                    <Habit habit={habit} />
+                ))}
                 <CreateModal />
             </div>
 

@@ -1,9 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import { Plus } from 'lucide-react';
+import { useHabit } from '../stores/use-habit';
 
 export function CreateModal() {
     const [isOpen, setIsOpen] = useState(false);
+    const { addHabit } = useHabit();
 
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
@@ -33,7 +34,14 @@ export function CreateModal() {
                         </h2>
                         <div className='flex gap-2 justify-center items-center'>
                             <input type="text" className='px-4 py-2 text-black font-bold rounded transition-colors' placeholder="Habit name" name='id' />
-                            <button type='submit' className='px-4 py-2 text-white bg-gray-500 font-bold lowercase rounded hover:text-gray-400 transition-colors' onClick={closeModal}>Add</button>
+                            <button type='submit' className='px-4 py-2 text-white bg-gray-500 font-bold lowercase rounded hover:text-gray-400 transition-colors' onClick={(e) => {
+                                const inputElement = (e.currentTarget.parentElement?.querySelector('input[name="id"]') as HTMLInputElement);
+                                closeModal()
+                                addHabit({
+                                    id: Math.floor(Math.random() * 1000),
+                                    name: inputElement?.value
+                                })
+                            }}>Add</button>
                         </div>
                     </div>
                 </div>
