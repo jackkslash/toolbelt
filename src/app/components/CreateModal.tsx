@@ -37,10 +37,9 @@ export function CreateModal() {
                             <button type='submit' className='px-4 py-2 text-white bg-gray-500 font-bold lowercase rounded hover:text-gray-400 transition-colors' onClick={(e) => {
                                 const inputElement = (e.currentTarget.parentElement?.querySelector('input[name="id"]') as HTMLInputElement);
                                 closeModal()
-                                addHabit({
-                                    id: Math.floor(Math.random() * 1000),
-                                    name: inputElement?.value
-                                })
+                                addHabit(
+                                    inputElement?.value
+                                )
                             }}>Add</button>
                         </div>
                     </div>

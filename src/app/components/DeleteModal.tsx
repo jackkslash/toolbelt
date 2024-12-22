@@ -1,12 +1,18 @@
 'use client';
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
+import { useHabit } from '../stores/use-habit';
 
-export function DeleteModal() {
+export function DeleteModal({ id }: { id: string }) {
+    const { deleteHabit } = useHabit()
     const [isOpen, setIsOpen] = useState(false);
-
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
+
+    const handleDelete = () => {
+        deleteHabit(id)
+        closeModal()
+    }
 
     return (
         <div >
@@ -31,7 +37,7 @@ export function DeleteModal() {
                         </h2>
                         <div className='flex gap-2 justify-center items-center'>
 
-                            <button type='submit' className='px-4 py-2 text-white bg-red-600 font-bold lowercase rounded hover:text-gray-400 transition-colors' onClick={closeModal}>Confirm</button>
+                            <button type='submit' className='px-4 py-2 text-white bg-red-600 font-bold lowercase rounded hover:text-gray-400 transition-colors' onClick={handleDelete}>Confirm</button>
                             <button type='submit' className='px-4 py-2 text-white bg-gray-500 font-bold lowercase rounded hover:text-gray-400 transition-colors' onClick={closeModal}>Cancel</button>
                         </div>
                     </div>

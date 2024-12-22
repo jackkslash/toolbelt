@@ -23,7 +23,7 @@ export default function page() {
                     </div>
                 </div>
                 {habits.map((habit) => (
-                    <Habit habit={habit} />
+                    <Habit key={habit.id} habit={habit} />
                 ))}
                 <CreateModal />
             </div>

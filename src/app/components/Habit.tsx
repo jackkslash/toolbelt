@@ -3,7 +3,7 @@ import Cube from './Cube'
 import { getLastNDays } from '../utils/utils';
 import { DeleteModal } from './DeleteModal';
 
-export default function Habit({ habit }: any) {
+export default function Habit({ habit }: { habit: { id: string, name: string } }) {
     const year = getLastNDays(365);
     const today = new Date().toISOString();
     console.log(habit.name)
@@ -12,7 +12,7 @@ export default function Habit({ habit }: any) {
             <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-md bg-slate-700 p-4 border border-slate-700 rounded-lg'>
                 <div className='flex justify-between items-center'>
                     <h1 className=' text-white font-bold uppercase'>{habit.name}</h1>
-                    <DeleteModal />
+                    <DeleteModal id={habit.id} />
 
                 </div>
 
