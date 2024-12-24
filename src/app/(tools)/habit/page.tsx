@@ -1,12 +1,10 @@
-'use client';
 import { CreateModal } from '@/app/components/CreateModal'
-import Habit from '@/app/components/Habit';
-import { useHabit } from '@/app/stores/use-habit';
+import HabitList from '@/app/components/HabitList'
 import Link from 'next/link'
 import React from 'react'
 
+
 export default function page() {
-    const { habits } = useHabit();
 
     return (
         <>
@@ -22,9 +20,7 @@ export default function page() {
                             pomodoro </Link>
                     </div>
                 </div>
-                {habits.map((habit) => (
-                    <Habit key={habit.id} habit={habit} />
-                ))}
+                <HabitList />
                 <CreateModal />
             </div>
 
