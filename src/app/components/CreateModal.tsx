@@ -1,13 +1,28 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHabit } from '../stores/use-habit';
 
 export function CreateModal() {
     const [isOpen, setIsOpen] = useState(false);
     const { addHabit } = useHabit();
 
+
+    const [userId, setUserId] = useState<string | null>(null);
+
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
+
+
+
+    useEffect(() => {
+        const userId = localStorage.getItem('ID'); // Retrieve the userId from local storage
+
+        if (userId) {
+            setUserId(userId);
+        } else {
+            console.error("User ID not found in local storage.");
+        }
+    }, []);
 
     return (
         <div className='p-4'>
@@ -38,7 +53,8 @@ export function CreateModal() {
                                 const inputElement = (e.currentTarget.parentElement?.querySelector('input[name="id"]') as HTMLInputElement);
                                 closeModal()
                                 addHabit(
-                                    inputElement?.value
+                                    inputElement?.value,
+                                    userId!
                                 )
                             }}>Add</button>
                         </div>

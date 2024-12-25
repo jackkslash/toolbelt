@@ -4,8 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 
-export default function page() {
-
+export default async function page() {
     return (
         <>
             <div className="flex flex-col items-center justify-center bg-gray-900 h-screen ">
