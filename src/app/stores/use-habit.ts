@@ -47,7 +47,6 @@ export const useHabit = create<HabitStore>((set) => ({
     },
     deleteHabit: async (id: string) => {
         try {
-            console.log("id store", id)
             const res = await fetch(`/api/habits?id=${id}`, { method: "DELETE" });
             if (!res.ok) throw new Error(`Failed to delete habit: ${res.statusText}`);
             set((state) => ({
@@ -64,6 +63,8 @@ export const useHabit = create<HabitStore>((set) => ({
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id, name }),
             });
+            console.log("id store", id)
+            console.log("name", name)
             if (!res.ok) throw new Error(`Failed to update habit: ${res.statusText}`);
             set((state) => ({
                 habits: state.habits.map((habit) =>

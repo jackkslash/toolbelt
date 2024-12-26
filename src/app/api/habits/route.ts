@@ -55,7 +55,7 @@ export async function DELETE(request: Request) {
 
     try {
         await db.delete(habits).where(eq(habits.id, id));
-        return NextResponse.json({ message: "Habit deleted" }, { status: 204 });
+        return NextResponse.json({ message: "Habit deleted" }, { status: 200 });
     } catch (error) {
         console.error("Error deleting habit:", error);
         return NextResponse.json({ error: "Failed to delete habit" }, { status: 500 });
@@ -66,7 +66,8 @@ export async function DELETE(request: Request) {
 export async function PUT(request: Request) {
     try {
         const { id, name } = await request.json();
-
+        console.log("id", id)
+        console.log("name", name)
         if (!id || !name) {
             return NextResponse.json({ error: "ID and name are required" }, { status: 400 });
         }

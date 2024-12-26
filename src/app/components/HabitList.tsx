@@ -18,9 +18,8 @@ export default function HabitList() {
             console.error("User ID not found in local storage.");
         }
     }, []);
-    console.log("after ", habits)
     return (
-        <div>
+        <div className='space-y-4'>
             {habits.map((habit) => (
                 <Habit key={habit.id} habit={habit} />
             ))}

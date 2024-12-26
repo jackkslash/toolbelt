@@ -6,9 +6,9 @@ import React from 'react'
 
 export default async function page() {
     return (
-        <>
-            <div className="flex flex-col items-center justify-center bg-gray-900 h-screen ">
-                <div className="flex flex-row items-center justify-center gap-4 text-white">
+        <div>
+            <div className="flex flex-col items-center bg-gray-900 min-h-screen">
+                <div className="flex flex-row items-center justify-center gap-4 text-white py-8">
                     <Link href="/">
                         <h1 className="text-6xl font-bold text-white">toolbelt</h1>
                     </Link>
@@ -19,10 +19,11 @@ export default async function page() {
                             pomodoro </Link>
                     </div>
                 </div>
-                <HabitList />
-                <CreateModal />
+                <div className="flex flex-col items-center w-full overflow-y-auto">
+                    <HabitList />
+                    <CreateModal />
+                </div>
             </div>
-
-        </>
+        </div>
     )
 }
