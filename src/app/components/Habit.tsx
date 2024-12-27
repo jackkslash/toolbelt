@@ -10,7 +10,7 @@ export default function Habit({ habit }: { habit: { id: string, name: string } }
     console.log(habit.name)
     return (
         <div>
-            <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-sm bg-slate-700 p-4 border border-slate-700 rounded-lg'>
+            <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-sm bg-slate-700 p-4 border border-slate-700 rounded-lg '>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-2'>
                         <h1 className=' text-white font-bold uppercase'>{habit.name}</h1>
@@ -20,7 +20,7 @@ export default function Habit({ habit }: { habit: { id: string, name: string } }
                 </div>
 
                 <div
-                    className='flex flex-row gap-2 overflow-x-auto max-w-screen-md'
+                    className='flex flex-row gap-2 overflow-x-auto max-w-screen-md scrollbar  scrollbar-track-slate-700 scrollbar-thumb-slate-500 '
                     ref={(el) => {
                         if (el) {
                             const currentMonth = new Date().getMonth();
@@ -31,7 +31,7 @@ export default function Habit({ habit }: { habit: { id: string, name: string } }
                     }}
                 >
                     {year.map((index) => (
-                        <div key={index.month} className="flex-shrink-0 w-16">
+                        <div key={index.month} className="flex-shrink-0 w-16 pb-2">
                             <h2 className='text-white font-bold uppercase mb-2'>{index.monthText}</h2>
                             <div className="grid grid-cols-4 gap-1 ">
                                 {index.dates.map((date) => (

@@ -8,5 +8,7 @@ export default {
   ],
   theme: {
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ],
 } satisfies Config;
