@@ -12,7 +12,7 @@ export function EditModal({ id, name }: { id: string, name: string }) {
 
 
     return (
-        <div className='p-4'>
+        <div>
             <button
                 onClick={openModal}
                 className=" text-white font-bold lowercase rounded hover:text-gray-400 transition-colors"

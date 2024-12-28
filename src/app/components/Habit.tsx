@@ -13,7 +13,7 @@ export default function Habit({ habit }: { habit: { id: string, name: string } }
             <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-sm bg-slate-700 p-4 border border-slate-700 rounded-lg '>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-2'>
-                        <h1 className=' text-white font-bold uppercase'>{habit.name}</h1>
+                        <h1 className=' text-white font-bold uppercase mb-1'>{habit.name}</h1>
                         <EditModal id={habit.id} name={habit.name} />
                     </div>
                     <DeleteModal id={habit.id} />
