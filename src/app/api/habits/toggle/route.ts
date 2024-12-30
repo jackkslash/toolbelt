@@ -12,10 +12,11 @@ export async function POST(request: NextRequest) {
             { status: 400 }
         );
     }
+
     // Check if completion exists for this habit and date
     const existing = await db.query.habitCompletions.findFirst({
         where: and(eq(habitCompletions.habitId, habitId),
-            eq(habitCompletions.completedDate, new Date(date)))
+            eq(habitCompletions.completedDate, date))
     });
 
     if (existing) {
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
         const completion = await db.insert(habitCompletions).values({
             id: Math.random().toString().slice(2, 8),
             habitId,
-            completedDate: new Date(date)
+            completedDate: date.slice(0, 10),
         });
         return NextResponse.json({ message: 'Habit completion added' }, { status: 201 });
     }

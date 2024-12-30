@@ -1,10 +1,16 @@
 import { create } from "zustand";
 
+type Completion = {
+    id: string;
+    completedDate: Date;
+};
+
 type Habit = {
     id: string;
     userId: string;
     name: string;
     createdAt: Date;
+    completions: Completion[];
 };
 
 type HabitStore = {
@@ -29,8 +35,6 @@ export const useHabit = create<HabitStore>((set) => ({
     },
     addHabit: async (name: string, userId: string) => {
         try {
-            console.log("name", name);
-            console.log("userId", userId);
             const res = await fetch("/api/habits", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -63,8 +67,6 @@ export const useHabit = create<HabitStore>((set) => ({
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ id, name }),
             });
-            console.log("id store", id)
-            console.log("name", name)
             if (!res.ok) throw new Error(`Failed to update habit: ${res.statusText}`);
             set((state) => ({
                 habits: state.habits.map((habit) =>

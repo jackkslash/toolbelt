@@ -4,10 +4,25 @@ import { getLastNDays } from '../utils/utils';
 import { DeleteModal } from './DeleteModal';
 import { EditModal } from './EditModal';
 
-export default function Habit({ habit }: { habit: { id: string, name: string } }) {
+
+interface Completion {
+    id: string;
+    completedDate: Date;
+}
+
+interface HabitProps {
+    habit: {
+        id: string;
+        name: string;
+        userId: string;
+        createdAt: Date;
+        completions: Completion[];
+    }
+}
+
+export default function Habit({ habit }: HabitProps) {
     const year = getLastNDays(365);
     const today = new Date().toISOString();
-    console.log(habit.name)
     return (
         <div>
             <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-sm bg-slate-700 p-4 border border-slate-700 rounded-lg '>
@@ -36,7 +51,7 @@ export default function Habit({ habit }: { habit: { id: string, name: string } }
                             <div className="grid grid-cols-4 gap-1 ">
                                 {index.dates.map((date) => (
                                     <div key={date}>
-                                        <Cube date={date} today={today}></Cube>
+                                        <Cube date={date} today={today} completions={habit.completions}></Cube>
                                     </div>
                                 ))}
                             </div>

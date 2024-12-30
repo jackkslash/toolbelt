@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
-import { habits } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { habitCompletions, habits } from "@/db/schema";
+import { desc, eq, sql } from "drizzle-orm";
 
 // GET method: Fetch all habits
 export async function GET(request: Request) {
@@ -16,7 +16,35 @@ export async function GET(request: Request) {
     }
 
     try {
-        const data = await db.select().from(habits).where(eq(habits.userId, userId)).orderBy(habits.createdAt);
+        // If no completions, return [] instead of null
+        // Create JSON array from grouped rows
+        // Shape each completion object
+        // Return array of habits with completions
+
+        const data = await db
+            .select({
+                id: habits.id,
+                name: habits.name,
+                userId: habits.userId,
+                createdAt: habits.createdAt,
+                completions: sql<Array<{ id: string, completedDate: Date }>>`
+            COALESCE(                              
+              json_agg(                            
+                json_build_object(                 
+                  'id', ${habitCompletions.id},
+                  'completedDate', ${habitCompletions.completedDate}
+                )
+              ) FILTER (WHERE ${habitCompletions.id} IS NOT NULL), 
+              '[]'
+            )`.as('completions')
+            })
+            .from(habits)
+            .leftJoin(
+                habitCompletions,
+                eq(habits.id, habitCompletions.habitId)
+            )
+            .groupBy(habits.id)
+            .orderBy(desc(habits.createdAt));
         return NextResponse.json(data, { status: 200 });
     } catch (error) {
         console.error("Error fetching habits:", error);
@@ -28,8 +56,6 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
     try {
         const { name, userId } = await request.json();
-        console.log("name", name)
-        console.log("userId", userId)
         const newHabit = {
             id: Math.random().toString().slice(2, 8),
             userId,
@@ -48,7 +74,6 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
-    console.log("id route", id)
     if (!id) {
         return NextResponse.json({ error: "Habit ID is required" }, { status: 400 });
     }
@@ -66,8 +91,6 @@ export async function DELETE(request: Request) {
 export async function PUT(request: Request) {
     try {
         const { id, name } = await request.json();
-        console.log("id", id)
-        console.log("name", name)
         if (!id || !name) {
             return NextResponse.json({ error: "ID and name are required" }, { status: 400 });
         }

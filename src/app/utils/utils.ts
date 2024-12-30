@@ -36,10 +36,13 @@ export function getLastNDays(days: number = 365): dateGroups[] {
         date.setHours(0, 0, 0, 0)
 
         const monthKey = date.toISOString().slice(0, 7)
+        const fullDate = date.toISOString().slice(0, 10)
         if (!monthGroups[monthKey]) {
             monthGroups[monthKey] = []
         }
-        monthGroups[monthKey].push(date.toISOString())
+        if (!monthGroups[monthKey].includes(fullDate)) {
+            monthGroups[monthKey].push(fullDate)
+        }
     }
 
     return Object.entries(monthGroups).map(([key, dates]) => ({
@@ -48,7 +51,6 @@ export function getLastNDays(days: number = 365): dateGroups[] {
         dates
     }))
 }
-
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))

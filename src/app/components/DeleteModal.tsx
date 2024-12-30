@@ -12,9 +12,7 @@ export function DeleteModal({ id }: { id: string }) {
 
     const handleDelete = async () => {
         try {
-            console.log("Attempting to delete habit with ID:", id);
             await deleteHabit(id);
-            console.log("Habit deleted successfully");
             closeModal();
         } catch (error) {
             console.error("Error deleting habit:", error);

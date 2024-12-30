@@ -11,5 +11,5 @@ export const habits = pgTable('habits', {
 export const habitCompletions = pgTable('habit_completions', {
     id: text('id').primaryKey(),
     habitId: text('habit_id').notNull().references(() => habits.id),
-    completedDate: timestamp('completed_date').notNull(),
+    completedDate: timestamp('completed_date', { mode: "string" }).notNull(),
 });
