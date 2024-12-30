@@ -29,8 +29,7 @@ interface dateGroups {
 export function getLastNDays(days: number = 365): dateGroups[] {
     const today = new Date();
     const monthGroups: { [key: string]: string[] } = {}
-
-    for (let i = days; i > 0; i--) {
+    for (let i = days; i >= 0; i--) {
         const date = new Date(today)
         date.setDate(today.getDate() - i)
         date.setHours(0, 0, 0, 0)

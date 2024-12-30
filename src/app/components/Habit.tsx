@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Cube from './Cube'
 import { getLastNDays } from '../utils/utils';
@@ -21,8 +22,9 @@ interface HabitProps {
 }
 
 export default function Habit({ habit }: HabitProps) {
-    const year = getLastNDays(365);
+    const year = getLastNDays(366);
     const today = new Date().toISOString();
+    const hasScrolledRef = React.useRef(false);
     return (
         <div>
             <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-sm bg-slate-700 p-4 border border-slate-700 rounded-lg '>
@@ -41,7 +43,11 @@ export default function Habit({ habit }: HabitProps) {
                             const currentMonth = new Date().getMonth();
                             // Each month section is roughly 64px (w-16) plus gap
                             const scrollPosition = (currentMonth * 68);
-                            el.scrollLeft = scrollPosition;
+
+                            if (!hasScrolledRef.current) {
+                                el.scrollLeft = scrollPosition;
+                                hasScrolledRef.current = true;
+                            }
                         }
                     }}
                 >
@@ -51,7 +57,7 @@ export default function Habit({ habit }: HabitProps) {
                             <div className="grid grid-cols-4 gap-1 ">
                                 {index.dates.map((date) => (
                                     <div key={date}>
-                                        <Cube date={date} today={today} completions={habit.completions}></Cube>
+                                        <Cube date={date} today={today} completions={habit.completions} id={habit.id}></Cube>
                                     </div>
                                 ))}
                             </div>

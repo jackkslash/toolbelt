@@ -10,6 +10,6 @@ export const habits = pgTable('habits', {
 
 export const habitCompletions = pgTable('habit_completions', {
     id: text('id').primaryKey(),
-    habitId: text('habit_id').notNull().references(() => habits.id),
+    habitId: text('habit_id').notNull().references(() => habits.id, { onDelete: 'cascade' }),
     completedDate: timestamp('completed_date', { mode: "string" }).notNull(),
 });

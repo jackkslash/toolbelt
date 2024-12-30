@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { habitCompletions, habits } from "@/db/schema";
-import { desc, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 // GET method: Fetch all habits
 export async function GET(request: Request) {
@@ -44,7 +44,6 @@ export async function GET(request: Request) {
                 eq(habits.id, habitCompletions.habitId)
             )
             .groupBy(habits.id)
-            .orderBy(desc(habits.createdAt));
         return NextResponse.json(data, { status: 200 });
     } catch (error) {
         console.error("Error fetching habits:", error);

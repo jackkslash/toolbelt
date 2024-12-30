@@ -19,6 +19,7 @@ type HabitStore = {
     addHabit: (name: string, userId: string) => Promise<void>;
     deleteHabit: (id: string) => Promise<void>;
     updateHabit: (id: string, name: string) => Promise<void>;
+    toggleCompletion: (habitId: string, date: string) => Promise<void>;
 };
 
 export const useHabit = create<HabitStore>((set) => ({
@@ -77,4 +78,29 @@ export const useHabit = create<HabitStore>((set) => ({
             console.error("Error updating habit:", e);
         }
     },
+    toggleCompletion: async (habitId: string, date: string) => {
+        try {
+            const res = await fetch("/api/habits/toggle", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ habitId, date }),
+            });
+            if (!res.ok) throw new Error(`Failed to toggle completion: ${res.statusText}`);
+            const { message } = await res.json();
+            set((state) => ({
+                habits: state.habits.map((habit) =>
+                    habit.id === habitId
+                        ? {
+                            ...habit,
+                            completions: message.includes("added")
+                                ? [...(habit.completions || []), { id: Math.random().toString().slice(2, 8), completedDate: new Date(date) }]
+                                : habit.completions.filter((completion) => new Date(completion.completedDate).toISOString().slice(0, 10) !== date),
+                        }
+                        : habit
+                ),
+            }));
+        } catch (e) {
+            console.error("Error toggling completion:", e);
+        }
+    }
 }));
