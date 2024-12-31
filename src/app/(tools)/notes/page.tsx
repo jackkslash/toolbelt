@@ -1,3 +1,4 @@
+import TiptapEditor from '@/app/components/Editor'
 import Link from 'next/link'
 import React from 'react'
 
@@ -16,6 +17,7 @@ export default function page() {
                             pomodoro </Link>
                     </div>
                 </div>
+                <TiptapEditor />
             </div>
 
         </>
