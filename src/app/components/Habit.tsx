@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Cube from './Cube'
 import { getLastNDays } from '../utils/utils';
 import { DeleteModal } from './DeleteModal';
@@ -25,6 +25,35 @@ export default function Habit({ habit }: HabitProps) {
     const year = getLastNDays(366);
     const today = new Date().toISOString();
     const hasScrolledRef = React.useRef(false);
+
+    const [longestStreak, setLongestStreak] = React.useState(0);
+
+    useEffect(() => {
+        let currentStreak = 0;
+        const sortedCompletions = [...habit?.completions || []].sort((a, b) =>
+            new Date(b.completedDate).getTime() - new Date(a.completedDate).getTime()
+        );
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        for (let i = 0; i < sortedCompletions.length; i++) {
+            const completionDate = new Date(sortedCompletions[i].completedDate);
+            completionDate.setHours(0, 0, 0, 0);
+
+            const daysDiff = Math.floor((today.getTime() - completionDate.getTime()) / (1000 * 60 * 60 * 24));
+
+            if (daysDiff === currentStreak) {
+                currentStreak++;
+            } else {
+                break;
+            }
+        }
+
+        setLongestStreak(currentStreak);
+    }, [habit.completions]);
+
+
     return (
         <div>
             <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-sm bg-slate-700 p-4 border border-slate-700 rounded-lg '>
@@ -33,7 +62,9 @@ export default function Habit({ habit }: HabitProps) {
                         <h1 className=' text-white font-bold uppercase mb-1'>{habit.name}</h1>
                         <EditModal id={habit.id} name={habit.name} />
                     </div>
+                    <p className='text-white font-bold uppercase mb-1'>Longest Streak: {longestStreak} days</p>
                     <DeleteModal id={habit.id} />
+
                 </div>
 
                 <div
