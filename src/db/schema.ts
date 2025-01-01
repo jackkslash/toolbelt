@@ -1,3 +1,4 @@
+import { JSONContent } from '@tiptap/react';
 import { pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 // Table for storing habits
@@ -12,4 +13,12 @@ export const habitCompletions = pgTable('habit_completions', {
     id: text('id').primaryKey(),
     habitId: text('habit_id').notNull().references(() => habits.id, { onDelete: 'cascade' }),
     completedDate: timestamp('completed_date', { mode: "string" }).notNull(),
+});
+
+export const notes = pgTable('notes', {
+    id: text('id').primaryKey(),
+    userId: text('user_id').notNull(),
+    note: text('note').$type<JSONContent>(),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+    updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });

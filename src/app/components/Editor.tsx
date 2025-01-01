@@ -7,7 +7,7 @@ import EditorMenuBar from './EditorMenuBar';
 export default function Editor() {
     const editor = useEditor({
         extensions: [StarterKit],
-        content: '<p>Start typing...</p>',
+        content: '',
         editorProps: {
             attributes: {
                 class: 'prose max-w-none p-4 focus:outline-none min-h-[200px]',
