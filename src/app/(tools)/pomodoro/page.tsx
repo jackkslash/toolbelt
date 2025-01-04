@@ -1,3 +1,4 @@
+import Pomo from '@/app/components/Pomo'
 import Link from 'next/link'
 import React from 'react'
 
@@ -16,6 +17,7 @@ export default function page() {
                             notes </Link>
                     </div>
                 </div>
+                <Pomo />
             </div>
 
         </>
