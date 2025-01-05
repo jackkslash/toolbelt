@@ -1,9 +1,10 @@
+import { JSONContent } from "@tiptap/react";
 import { create } from "zustand";
 
 type Note = {
     id: string;
     userId: string;
-    note: string;
+    note: JSONContent;
     createdAt: Date;
     updatedAt: Date;
 };
@@ -11,9 +12,9 @@ type Note = {
 type NoteStore = {
     notes: Note[];
     getNotes: (userId: string) => void;
-    addNote: (note: Note) => void;
+    addNote: (note: JSONContent, id: string) => void;
     deleteNote: (id: string) => void;
-    updateNote: (id: string, note: Note) => void;
+    updateNote: (id: string, note: JSONContent) => void;
 }
 
 export const useNote = create<NoteStore>((set) => ({
@@ -28,12 +29,12 @@ export const useNote = create<NoteStore>((set) => ({
             console.error("Error fetching notes:", error);
         }
     },
-    addNote: async (note: Note) => {
+    addNote: async (note: JSONContent, userId: string) => {
         try {
             const res = await fetch("/api/notes", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(note),
+                body: JSON.stringify({ note, userId }),
             });
             if (!res.ok) throw new Error(`Failed to add note: ${res.statusText}`);
             const newNote = await res.json();
@@ -55,7 +56,7 @@ export const useNote = create<NoteStore>((set) => ({
             console.error("Error deleting note:", error);
         }
     },
-    updateNote: async (id: string, note: Note) => {
+    updateNote: async (id: string, note: JSONContent) => {
         try {
             const res = await fetch("/api/notes", {
                 method: "PUT",
