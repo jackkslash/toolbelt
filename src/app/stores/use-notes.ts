@@ -11,15 +11,15 @@ type Note = {
 
 type NoteStore = {
     notes: Note[];
-    getNotes: (userId: string) => void;
-    addNote: (note: JSONContent, id: string) => void;
-    deleteNote: (id: string) => void;
-    updateNote: (id: string, note: JSONContent) => void;
+    fetchNotes: (userId: string) => Promise<void>;
+    addNote: (note: JSONContent, id: string) => Promise<void>;
+    deleteNote: (id: string) => Promise<void>;
+    updateNote: (id: string, note: JSONContent) => Promise<void>;
 }
 
-export const useNote = create<NoteStore>((set) => ({
+export const useNotes = create<NoteStore>((set) => ({
     notes: [],
-    getNotes: async (userId: string) => {
+    fetchNotes: async (userId: string) => {
         try {
             const res = await fetch(`/api/notes?userId=${userId}`, { method: "GET" });
             if (!res.ok) throw new Error(`Failed to fetch notes: ${res.statusText}`);

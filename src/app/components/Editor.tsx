@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import EditorMenuBar from './EditorMenuBar';
-import { useNote } from '../stores/use-notes';
+import { useNotes } from '../stores/use-notes';
 
 export default function Editor() {
     const [userId, setUserId] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export default function Editor() {
         },
     });
 
-    const { addNote } = useNote();
+    const { addNote } = useNotes();
     useEffect(() => {
         const userId = localStorage.getItem('ID'); // Retrieve the userId from local storage
 
@@ -29,19 +29,17 @@ export default function Editor() {
     }, []);
 
 
-    const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!editor) return;
-        const data = editor.getJSON();
-        console.log(data);
-        addNote(data, userId!);
+        if (!editor || !userId) return;
+        await addNote(editor.getJSON(), userId);
         editor.commands.clearContent();
     };
 
     return (
         <div>
             <form onSubmit={handleOnSubmit}>
-                <div className=" border rounded">
+                <div className="border rounded">
                     <EditorMenuBar editor={editor} />
                     <EditorContent editor={editor} />
                 </div>
