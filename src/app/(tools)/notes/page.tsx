@@ -1,4 +1,4 @@
-import TiptapEditor from '@/app/components/Editor'
+import Editor from '@/app/components/Editor'
 import NoteList from '@/app/components/NoteList'
 import Link from 'next/link'
 import React from 'react'
@@ -18,10 +18,9 @@ export default function page() {
                             pomodoro </Link>
                     </div>
                 </div>
-                <div className='flex flex-row gap-4' >
+                <div className='flex flex-col gap-4' >
                     <NoteList />
-                    <TiptapEditor />
-
+                    <Editor />
                 </div>
             </div>
 

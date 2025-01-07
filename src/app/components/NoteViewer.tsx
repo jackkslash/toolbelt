@@ -5,6 +5,7 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 
 import React from 'react'
+import { XIcon } from "lucide-react";
 
 export default function NoteViewer({ content }: { content: JSONContent }) {
     const editor = useEditor({
@@ -25,5 +26,10 @@ export default function NoteViewer({ content }: { content: JSONContent }) {
         return <div>Loading...</div>;
     }
 
-    return <EditorContent editor={editor} />;
+    return (
+        <div className="flex flex-row justify-between">
+            <EditorContent editor={editor} />
+            <XIcon className="cursor-pointer" />
+        </div>
+    );
 }

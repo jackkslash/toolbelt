@@ -15,9 +15,9 @@ export default function () {
         }
     }, []);
     return (
-        <div className="space-y-4 pb-4  overflow-auto h-52">
+        <div className="space-y-4 pb-4 overflow-auto h-60 scrollbar scrollbar-track-slate-700 scrollbar-thumb-slate-500">
             {notes.map((note) => (
-                <div key={note.id} className="p-4 border w-72">
+                <div key={note.id} className="mr-2 p-4 border w-72">
                     <NoteViewer content={note.note} />
                 </div>
             ))}
