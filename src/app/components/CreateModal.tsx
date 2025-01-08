@@ -30,7 +30,7 @@ export function CreateModal() {
                 onClick={openModal}
                 className=" text-white font-bold lowercase rounded hover:text-gray-400 transition-colors"
             >
-                <div className='flex items-center gap-2 px-48 py-8 bg-slate-500 max-w-screen-md rounded-md'>
+                <div className='flex items-center gap-2 px-16 py-8 bg-slate-500 max-w-screen-md rounded-md'>
                     <p className='text-2xl'>Create Habit</p>
                 </div>
             </button>

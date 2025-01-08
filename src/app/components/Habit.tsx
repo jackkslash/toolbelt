@@ -56,13 +56,13 @@ export default function Habit({ habit }: HabitProps) {
 
     return (
         <div>
-            <div className='flex flex-col gap-2 overflow-x-auto max-w-screen-sm bg-slate-700 p-4 border border-slate-700 rounded-lg '>
+            <div className='flex flex-col gap-2 overflow-x-auto max-w-72 md:max-w-screen-md bg-slate-700 p-4 border border-slate-700 rounded-lg '>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-2'>
                         <h1 className=' text-white font-bold uppercase mb-1'>{habit.name}</h1>
                         <EditModal id={habit.id} name={habit.name} />
                     </div>
-                    <p className='text-white font-bold uppercase mb-1'>Longest Streak: {longestStreak} days</p>
+                    {/* <p className='text-white font-bold uppercase mb-1 font'>Longest Streak: {longestStreak} days</p> */}
                     <DeleteModal id={habit.id} />
 
                 </div>
@@ -70,17 +70,12 @@ export default function Habit({ habit }: HabitProps) {
                 <div
                     className='flex flex-row gap-2 overflow-x-auto max-w-screen-md scrollbar  scrollbar-track-slate-700 scrollbar-thumb-slate-500 '
                     ref={(el) => {
-                        if (el) {
-                            const currentMonth = new Date().getMonth();
-                            // Each month section is roughly 64px (w-16) plus gap
-                            const scrollPosition = (currentMonth * 68);
-
-                            if (!hasScrolledRef.current) {
-                                el.scrollLeft = scrollPosition;
-                                hasScrolledRef.current = true;
-                            }
+                        if (!hasScrolledRef.current && el) {
+                            el.scrollLeft = el.scrollWidth;
+                            hasScrolledRef.current = true;
                         }
                     }}
+
                 >
                     {year.map((index) => (
                         <div key={index.month} className="flex-shrink-0 w-16 pb-2">
