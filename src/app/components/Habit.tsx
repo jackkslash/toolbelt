@@ -4,6 +4,7 @@ import Cube from './Cube'
 import { getLastNDays } from '../utils/utils';
 import { DeleteModal } from './DeleteModal';
 import { EditModal } from './EditModal';
+import Link from 'next/link';
 
 
 interface Completion {
@@ -58,13 +59,14 @@ export default function Habit({ habit }: HabitProps) {
         <div>
             <div className='flex flex-col gap-2 overflow-x-auto max-w-72 md:max-w-screen-md bg-slate-700 p-4 border border-slate-700 rounded-lg '>
                 <div className='flex justify-between items-center'>
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-8'>
                         <h1 className=' text-white font-bold uppercase mb-1'>{habit.name}</h1>
                         <EditModal id={habit.id} name={habit.name} />
+                        <Link href={`/habit/${habit.id}`} className='text-white font-bold uppercase mb-1 font'>Analytics</Link>
+
                     </div>
                     {/* <p className='text-white font-bold uppercase mb-1 font'>Longest Streak: {longestStreak} days</p> */}
                     <DeleteModal id={habit.id} />
-
                 </div>
 
                 <div

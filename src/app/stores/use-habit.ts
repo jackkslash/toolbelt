@@ -19,6 +19,7 @@ interface StoreState {
     status: Status;
     error: string | null;
     habits: Habit[];
+    getHabitById: (id: string) => Habit | undefined; // Add this to the interface
 }
 
 interface StoreActions {
@@ -70,7 +71,7 @@ const apiService = {
     }
 }
 
-export const useHabit = create<HabitStore>((set) => ({
+export const useHabit = create<HabitStore>((set, get) => ({
     status: 'idle',
     error: null,
     habits: [],
@@ -86,6 +87,9 @@ export const useHabit = create<HabitStore>((set) => ({
             });
             console.error("Error fetching habits:", e);
         }
+    },
+    getHabitById: (id: string) => {
+        return get().habits.find(habit => habit.id === id);
     },
     addHabit: async (name: string, userId: string) => {
         const oHabit: Habit = {
