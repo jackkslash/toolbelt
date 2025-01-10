@@ -21,7 +21,7 @@ export default function HabitList() {
     return (
         <div className='space-y-4'>
             {habits.map((habit) => (
-                <Habit key={habit.id} habit={habit} />
+                <Habit key={habit.id} habit={habit} editable={true} />
             ))}
         </div>
     );

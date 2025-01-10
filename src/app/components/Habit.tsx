@@ -19,41 +19,14 @@ interface HabitProps {
         userId: string;
         createdAt: Date;
         completions: Completion[];
-    }
+    },
+    editable: boolean
 }
 
-export default function Habit({ habit }: HabitProps) {
+export default function Habit({ habit, editable }: HabitProps) {
     const year = getLastNDays(366);
     const today = new Date().toISOString();
     const hasScrolledRef = React.useRef(false);
-
-    const [longestStreak, setLongestStreak] = React.useState(0);
-
-    useEffect(() => {
-        let currentStreak = 0;
-        const sortedCompletions = [...habit?.completions || []].sort((a, b) =>
-            new Date(b.completedDate).getTime() - new Date(a.completedDate).getTime()
-        );
-
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        for (let i = 0; i < sortedCompletions.length; i++) {
-            const completionDate = new Date(sortedCompletions[i].completedDate);
-            completionDate.setHours(0, 0, 0, 0);
-
-            const daysDiff = Math.floor((today.getTime() - completionDate.getTime()) / (1000 * 60 * 60 * 24));
-
-            if (daysDiff === currentStreak) {
-                currentStreak++;
-            } else {
-                break;
-            }
-        }
-
-        setLongestStreak(currentStreak);
-    }, [habit.completions]);
-
 
     return (
         <div>
@@ -61,12 +34,15 @@ export default function Habit({ habit }: HabitProps) {
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-8'>
                         <h1 className=' text-white font-bold uppercase mb-1'>{habit.name}</h1>
-                        <EditModal id={habit.id} name={habit.name} />
-                        <Link href={`/habit/${habit.id}`} className='text-white font-bold uppercase mb-1 font'>Analytics</Link>
+                        {editable && <div className='flex flex-row gap-8'>
+                            <EditModal id={habit.id} name={habit.name} />
+                            <Link href={`/habit/${habit.id}`} className='text-white font-bold uppercase mb-1 font'>Analytics</Link>
+                        </div>
+
+                        }
 
                     </div>
-                    {/* <p className='text-white font-bold uppercase mb-1 font'>Longest Streak: {longestStreak} days</p> */}
-                    <DeleteModal id={habit.id} />
+                    {editable && <DeleteModal id={habit.id} />}
                 </div>
 
                 <div
