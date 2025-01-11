@@ -94,27 +94,29 @@ export default function Analytics({ id }: AnalyticsProps) {
     }
 
     return (
-        <div className='flex flex-col gap-4 p-4 m-12 border border-slate-700 rounded-lg'>
+        <div className='flex flex-col gap-4 p-4 m-12 border border-slate-700 rounded-lg items-center justify-center'>
+            <p className='text-center text-xl font-bold'>{habit.name}</p>
             <div className='flex flex-col gap-4 m-12'>
                 <Habit habit={habit} editable={false} />
 
             </div>
-            <p><strong>Name:</strong> {habit.name}</p>
-            <p>
-                <strong>Completions:</strong> {habit.completions.length} times
-            </p>
-            <p>
-                <strong>Longest Streak:</strong> {stats.longestStreak} days
-            </p>
-            <p>
-                <strong>Month Consistency:</strong> {stats.monthConsistency}%
-            </p>
-            <p>
-                <strong>Weekly Average:</strong> {stats.weeklyAverage} times
-            </p>
-            <p>
-                <strong>Current Streak:</strong> {stats.currentStreak} days
-            </p>
+            <div className='flex flex-col items-center md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
+                <div className='border border-slate-700 rounded-lg m-4 p-12'>
+                    <strong>Completions:</strong> {habit.completions.length} times
+                </div>
+                <div className='border border-slate-700 rounded-lg p-12 m-4'>
+                    <strong>Longest Streak:</strong> {stats.longestStreak} days
+                </div>
+                <div className='border border-slate-700 rounded-lg p-12 m-4'>
+                    <strong>Month Consistency:</strong> {stats.monthConsistency}%
+                </div>
+                <div className='border border-slate-700 rounded-lg p-12 m-4'>
+                    <strong>Weekly Average:</strong> {stats.weeklyAverage} times
+                </div>
+                <div className='border border-slate-700 rounded-lg p-12 m-4'>
+                    <strong>Current Streak:</strong> {stats.currentStreak} days
+                </div>
+            </div>
         </div>
     );
 }
