@@ -30,13 +30,13 @@ export default function Habit({ habit, editable }: HabitProps) {
 
     return (
         <div>
-            <div className='flex flex-col gap-2 overflow-x-auto max-w-72 md:max-w-screen-md bg-slate-700 p-4 border border-slate-700 rounded-lg '>
+            <div className='flex flex-col gap-2 w-full max-w-[18rem] sm:max-w-[24rem] md:max-w-screen-md bg-slate-700 p-4 border border-slate-700 rounded-lg'>
                 <div className='flex justify-between items-center'>
-                    <div className='flex items-center gap-8'>
+                    <div className='flex items-center gap-4'>
                         <h1 className=' text-white font-bold uppercase mb-1'>{habit.name}</h1>
-                        {editable && <div className='flex flex-row gap-8'>
-                            <EditModal id={habit.id} name={habit.name} />
+                        {editable && <div className='flex flex-row gap-4'>
                             <Link href={`/habit/${habit.id}`} className='text-white font-bold uppercase mb-1 font'>Analytics</Link>
+                            <EditModal id={habit.id} name={habit.name} />
                         </div>
 
                         }

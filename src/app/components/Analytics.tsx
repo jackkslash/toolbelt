@@ -94,27 +94,36 @@ export default function Analytics({ id }: AnalyticsProps) {
     }
 
     return (
-        <div className='flex flex-col gap-4 p-4 m-12 border border-slate-700 rounded-lg items-center justify-center'>
+        <div className='flex flex-col gap-4 p-4 m-8 items-center justify-center'>
             <p className='text-center text-xl font-bold'>{habit.name}</p>
-            <div className='flex flex-col gap-4 m-12'>
+            <div className='flex flex-col m-12'>
                 <Habit habit={habit} editable={false} />
-
             </div>
-            <div className='flex flex-col items-center md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
-                <div className='border border-slate-700 rounded-lg m-4 p-12'>
-                    <strong>Completions:</strong> {habit.completions.length} times
+            <div className='flex flex-col items-center md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4'>
+                <div className='border border-slate-700 rounded-lg m-4 p-8 w-48 h-32 flex items-center justify-center text-center'>
+                    <div>
+                        <strong>Completions:</strong><br />{habit.completions.length} times
+                    </div>
                 </div>
-                <div className='border border-slate-700 rounded-lg p-12 m-4'>
-                    <strong>Longest Streak:</strong> {stats.longestStreak} days
+                <div className='border border-slate-700 rounded-lg m-4 p-8 w-48 h-32 flex items-center justify-center text-center'>
+                    <div>
+                        <strong>Longest Streak:</strong><br />{stats.longestStreak} days
+                    </div>
                 </div>
-                <div className='border border-slate-700 rounded-lg p-12 m-4'>
-                    <strong>Month Consistency:</strong> {stats.monthConsistency}%
+                <div className='border border-slate-700 rounded-lg m-4 p-8 w-48 h-32 flex items-center justify-center text-center'>
+                    <div>
+                        <strong>Month Consistency:</strong><br />{stats.monthConsistency}%
+                    </div>
                 </div>
-                <div className='border border-slate-700 rounded-lg p-12 m-4'>
-                    <strong>Weekly Average:</strong> {stats.weeklyAverage} times
+                <div className='border border-slate-700 rounded-lg m-4 p-8 w-48 h-32 flex items-center justify-center text-center'>
+                    <div>
+                        <strong>Weekly Average:</strong><br />{stats.weeklyAverage} times
+                    </div>
                 </div>
-                <div className='border border-slate-700 rounded-lg p-12 m-4'>
-                    <strong>Current Streak:</strong> {stats.currentStreak} days
+                <div className='border border-slate-700 rounded-lg m-4 p-8 w-48 h-32 flex items-center justify-center text-center'>
+                    <div>
+                        <strong>Current Streak:</strong><br />{stats.currentStreak} days
+                    </div>
                 </div>
             </div>
         </div>
