@@ -30,7 +30,7 @@ export default function Habit({ habit, editable }: HabitProps) {
 
     return (
         <div>
-            <div className='flex flex-col gap-2 w-full max-w-[18rem] sm:max-w-[24rem] md:max-w-screen-md bg-slate-700 p-4 border border-slate-700 rounded-lg'>
+            <div className='flex flex-col gap-2 w-full max-w-[18rem] sm:max-w-[24rem] md:max-w-screen-md  p-4 border border-c1-lighter rounded-lg'>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-4'>
                         <h1 className=' text-white font-bold uppercase mb-1'>{habit.name}</h1>
@@ -46,7 +46,7 @@ export default function Habit({ habit, editable }: HabitProps) {
                 </div>
 
                 <div
-                    className='flex flex-row gap-2 overflow-x-auto max-w-screen-md scrollbar  scrollbar-track-slate-700 scrollbar-thumb-slate-500 '
+                    className='flex flex-row gap-2 overflow-x-auto max-w-screen-md scrollbar  scrollbar-track-c1-light scrollbar-thumb-c1-lighter '
                     ref={(el) => {
                         if (!hasScrolledRef.current && el) {
                             el.scrollLeft = el.scrollWidth;
@@ -57,7 +57,7 @@ export default function Habit({ habit, editable }: HabitProps) {
                 >
                     {year.map((index) => (
                         <div key={index.month} className="flex-shrink-0 w-16 pb-2">
-                            <h2 className='text-white font-bold uppercase mb-2'>{index.monthText}</h2>
+                            <h2 className='text-white text-xs font-bold uppercase mb-2'>{index.monthText}</h2>
                             <div className="grid grid-cols-4 gap-1 ">
                                 {index.dates.map((date) => (
                                     <div key={date}>

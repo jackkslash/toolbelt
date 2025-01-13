@@ -47,7 +47,7 @@ export default function Editor() {
                 <button
                     onClick={() => handleOnSubmit}
                     type="submit"
-                    className="mt-2 gap-2 px-6 py-4 bg-slate-500 max-w-screen-md rounded-md float-end"
+                    className="mt-2 gap-2 px-6 py-4 bg-c1-lighter max-w-screen-md rounded-md float-end"
                 >Add Note</button>
             </form>
         </div>

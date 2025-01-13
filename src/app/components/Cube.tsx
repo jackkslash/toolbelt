@@ -31,7 +31,7 @@ export default function Cube({ id, date, today, completions }: { id: string, dat
             className={cn("border-white size-4 cursor-pointer rounded-sm border-[1px] border-transparent"
                 , {
                     "bg-gray-400": !isCompleted,
-                    "bg-green-400": isCompleted,
+                    "bg-blue-400": isCompleted,
                     "border-white-700": todayNoti,
                 }
             )}

@@ -6,7 +6,7 @@ import React from 'react'
 export default async function page() {
     return (
         <div>
-            <div className="flex flex-col items-center bg-gray-900">
+            <div className="flex flex-col items-center">
                 <div className="flex flex-col items-center overflow-y-auto">
                     <HabitList />
                     <CreateModal />

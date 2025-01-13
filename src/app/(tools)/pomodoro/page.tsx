@@ -4,7 +4,7 @@ import React from 'react'
 export default function page() {
     return (
         <>
-            <div className="flex flex-col items-center bg-gray-900 h-screen">
+            <div className="flex flex-col items-center h-screen">
                 <Pomo />
             </div>
 

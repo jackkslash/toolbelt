@@ -24,7 +24,7 @@ export function SyncModal() {
                     onClick={closeModal}
                 >
                     <div
-                        className=" bg-gray-800 rounded-lg shadow-xl w-96 max-w-full p-6 relative space-y-2"
+                        className=" bg-c1-lighter rounded-lg shadow-xl w-96 max-w-full p-6 relative space-y-2"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h2 className="flex justify-center text-xl font-bold mb-4 text-white">

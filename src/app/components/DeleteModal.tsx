@@ -34,7 +34,7 @@ export function DeleteModal({ id }: { id: string }) {
                     onClick={closeModal}
                 >
                     <div
-                        className="bg-gray-800 rounded-lg shadow-xl w-96 max-w-full p-6 relative space-y-2"
+                        className="bg-c1-lighter rounded-lg shadow-xl w-96 max-w-full p-6 relative space-y-2"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h2 className="flex justify-center text-md font-bold mb-4 text-white">
