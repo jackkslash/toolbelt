@@ -5,6 +5,7 @@ import { getLastNDays } from '../utils/utils';
 import { DeleteModal } from './DeleteModal';
 import { EditModal } from './EditModal';
 import Link from 'next/link';
+import { ChartArea } from 'lucide-react';
 
 
 interface Completion {
@@ -31,22 +32,21 @@ export default function Habit({ habit, editable }: HabitProps) {
     return (
         <div>
             <div className='flex flex-col gap-2 w-full max-w-[18rem] sm:max-w-[24rem] md:max-w-screen-md  p-4 border border-c1-lighter rounded-lg'>
-                <div className='flex justify-between items-center'>
-                    <div className='flex items-center gap-4'>
-                        <h1 className=' text-white font-bold uppercase mb-1'>{habit.name}</h1>
-                        {editable && <div className='flex flex-row gap-4'>
-                            <Link href={`/habit/${habit.id}`} className='text-white font-bold uppercase mb-1 font'>Analytics</Link>
+                {editable && <div className='flex justify-between items-center'>
+                    <div className='flex items-center justify-between w-full'>
+                        <h1 className='text-white font-bold uppercase mb-1'>{habit.name}</h1>
+                        <div className='flex flex-row gap-4'>
+                            <Link href={`/habit/${habit.id}`} className='text-white font-bold uppercase mb-1 font'>
+                                <ChartArea />
+                            </Link>
                             <EditModal id={habit.id} name={habit.name} />
+                            <DeleteModal id={habit.id} />
                         </div>
-
-                        }
-
                     </div>
-                    {editable && <DeleteModal id={habit.id} />}
-                </div>
+                </div>}
 
                 <div
-                    className='flex flex-row gap-2 overflow-x-auto max-w-screen-md scrollbar  scrollbar-track-c1-light scrollbar-thumb-c1-lighter '
+                    className='flex flex-row p-2 gap-2 overflow-x-auto max-w-screen-md scrollbar  scrollbar-track-c1-light scrollbar-thumb-c1-lighter '
                     ref={(el) => {
                         if (!hasScrolledRef.current && el) {
                             el.scrollLeft = el.scrollWidth;
