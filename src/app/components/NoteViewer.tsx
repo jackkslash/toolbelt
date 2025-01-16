@@ -29,7 +29,7 @@ export default function NoteViewer({ content }: { content: JSONContent }) {
     return (
         <div className="flex flex-row justify-between">
             <EditorContent editor={editor} />
-            <XIcon className="cursor-pointer" />
+            {/* <XIcon className="cursor-pointer" /> */}
         </div>
     );
 }
