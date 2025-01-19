@@ -2,7 +2,17 @@
 import { SettingsIcon } from 'lucide-react';
 import React, { useState } from 'react';
 
-export function PompSettingsModal({ setMins, setSecs, setBreakTime }: { setMins: React.Dispatch<React.SetStateAction<number>>, setSecs: React.Dispatch<React.SetStateAction<number>>, setBreakTime: React.Dispatch<React.SetStateAction<number>> }) {
+export function PompSettingsModal({
+    setMins,
+    setSecs,
+    setBreakTime,
+    setWorkTime
+}: {
+    setMins: React.Dispatch<React.SetStateAction<number>>,
+    setSecs: React.Dispatch<React.SetStateAction<number>>,
+    setBreakTime: React.Dispatch<React.SetStateAction<number>>,
+    setWorkTime: React.Dispatch<React.SetStateAction<number>>
+}) {
     const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => setIsOpen(true);
@@ -12,62 +22,62 @@ export function PompSettingsModal({ setMins, setSecs, setBreakTime }: { setMins:
         <div className="p-4">
             <button
                 onClick={openModal}
-                className="px-4 py-2 text-white font-bold lowercase rounded hover:text-gray-400 transition-colors"
+                className="p-2 text-white rounded-full hover:bg-c1-light transition-all duration-200"
             >
-                <SettingsIcon />
+                <SettingsIcon className="w-6 h-6" />
             </button>
             {isOpen && (
                 <div
-                    className="fixed inset-0 flex justify-center items-center"
+                    className="fixed inset-0 bg-black/50 flex justify-center items-center backdrop-blur-sm"
                     onClick={closeModal}
                 >
                     <div
-                        className=" bg-c1-lighter rounded-lg shadow-xl w-96 max-w-full p-6 relative space-y-2"
+                        className="bg-c1 border border-c1-light rounded-xl shadow-2xl w-96 max-w-full p-8 relative space-y-4"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <h2 className="flex justify-center text-xl font-bold mb-4 text-white">
+                        <h2 className="text-2xl font-bold text-center text-white mb-6">
                             Settings
                         </h2>
-                        <form className='flex flex-col gap-2' onSubmit={(e) => {
+                        <form className='flex flex-col gap-4' onSubmit={(e) => {
+                            e.preventDefault();
                             const inputElement = e.currentTarget.elements.namedItem('mins') as HTMLSelectElement;
                             const inputElement2 = e.currentTarget.elements.namedItem('breakTime') as HTMLSelectElement;
                             if (!inputElement?.value) {
-                                e.preventDefault()
-                                return
-                            } else {
-                                setMins(parseInt(inputElement?.value))
-                                setBreakTime(parseInt(inputElement2?.value))
-                                closeModal()
+                                return;
                             }
+                            const newTime = parseInt(inputElement?.value);
+                            setMins(newTime);
+                            setWorkTime(newTime);
+                            setBreakTime(parseInt(inputElement2?.value));
+                            setSecs(0);
+                            closeModal();
                         }}>
-                            <label className='text-white font-bold'>Minutes</label>
-                            <select name="mins" className='px-4 py-2 text-black font-bold rounded transition-colors'>
-                                <option value="0">0</option>
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="25">25</option>
-                                <option value="30">30</option>
-                                <option value="35">35</option>
-                                <option value="40">40</option>
-                                <option value="45">45</option>
-                            </select>
-                            <label className='text-white font-bold'>Break Time</label>
-                            <select name="breakTime" className='px-4 py-2 text-black font-bold rounded transition-colors'>
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="25">25</option>
-                            </select>
-                            <button type='submit' className='px-4 py-2 text-white font-bold lowercase rounded hover:text-gray-400 transition-colors'>Set</button>
+                            <div className="space-y-2">
+                                <label className='text-white font-medium block'>Work Time</label>
+                                <select name="mins" className='w-full px-4 py-2 bg-c1-light text-white rounded-lg border border-c1-lighter focus:outline-none focus:border-white transition-colors'>
+                                    {[0, 5, 10, 15, 20, 25, 30, 35, 40, 45].map(value => (
+                                        <option key={value} value={value}>{value}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="space-y-2">
+                                <label className='text-white font-medium block'>Break Time</label>
+                                <select name="breakTime" className='w-full px-4 py-2 bg-c1-light text-white rounded-lg border border-c1-lighter focus:outline-none focus:border-white transition-colors'>
+                                    {[5, 10, 15, 20, 25].map(value => (
+                                        <option key={value} value={value}>{value}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <button
+                                type='submit'
+                                className='w-full pb-4 bg-c1-light text-white font-bold rounded-lg hover:bg-c1-lighter transition-colors duration-200'
+                            >
+                                set
+                            </button>
                         </form>
-
                     </div>
                 </div>
-            )
-            }
-        </div >
+            )}
+        </div>
     );
 };
