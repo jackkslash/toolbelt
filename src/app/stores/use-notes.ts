@@ -11,6 +11,8 @@ type Note = {
 
 type NoteStore = {
     notes: Note[];
+    currentNote?: Note;
+    setCurrentNote: (note: Note) => void;
     fetchNotes: (userId: string) => Promise<void>;
     addNote: (note: JSONContent, id: string) => Promise<void>;
     deleteNote: (id: string) => Promise<void>;
@@ -19,6 +21,7 @@ type NoteStore = {
 
 export const useNotes = create<NoteStore>((set) => ({
     notes: [],
+    setCurrentNote: (note: Note) => set({ currentNote: note }),
     fetchNotes: async (userId: string) => {
         try {
             const res = await fetch(`/api/notes?userId=${userId}`, { method: "GET" });
